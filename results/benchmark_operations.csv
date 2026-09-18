@@ -1,0 +1,4 @@
+key_bits,trials,block_bytes,blocks_used,encrypt_int_mean_ms,decrypt_int_mean_ms,encrypt_text_mean_ms,decrypt_text_mean_ms,plaintext_bytes,ciphertext_bytes,expansion_ratio
+256,50,30,2,0.2278,0.1519,0.4576,0.3032,59,259,4.39
+512,50,62,1,1.3226,0.7448,1.3288,0.7543,59,257,4.356
+1024,50,126,1,7.4659,3.9664,7.5984,4.0546,59,513,8.695

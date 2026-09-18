@@ -1,0 +1,13 @@
+# Runtime dependencies
+# -------------------
+# The application itself requires NO third-party packages. All ElGamal
+# mathematics, randomness and encoding use the Python standard library
+# (secrets, json, tkinter, dataclasses).
+#
+# The packages below are needed only for the development tooling:
+#   pytest     - runs the unit and integration test suite (tests/)
+#   matplotlib - optional; draws the performance graph in benchmark.py.
+#                benchmark.py still writes its CSV results without it.
+
+pytest>=7.0
+matplotlib>=3.5

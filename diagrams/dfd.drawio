@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Data Flow Diagram" id="Data-Flow-Diagram">
+    <mxGraphModel dx="1100" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1700" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="n2" value="Context Diagram (Level 0)" style="text;html=1;fontStyle=1;fontSize=14;align=left;" vertex="1" parent="1"><mxGeometry x="60" y="20" width="300" height="30" as="geometry"/></mxCell>
+        <mxCell id="n3" value="User" style="whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1"><mxGeometry x="60" y="90" width="140" height="60" as="geometry"/></mxCell>
+        <mxCell id="n4" value="0
+ElGamal Encryption
+Application" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1"><mxGeometry x="340" y="80" width="220" height="80" as="geometry"/></mxCell>
+        <mxCell id="n5" value="plaintext, ciphertext,
+key size, commands" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n3" target="n4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n6" value="ciphertext, recovered plaintext,
+key values, errors" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n4" target="n3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n7" value="Level 1 Data Flow Diagram" style="text;html=1;fontStyle=1;fontSize=14;align=left;" vertex="1" parent="1"><mxGeometry x="60" y="220" width="300" height="30" as="geometry"/></mxCell>
+        <mxCell id="n8" value="User" style="whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1"><mxGeometry x="60" y="380" width="120" height="60" as="geometry"/></mxCell>
+        <mxCell id="n9" value="1.0
+Validate Input" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1"><mxGeometry x="240" y="290" width="170" height="60" as="geometry"/></mxCell>
+        <mxCell id="n10" value="2.0
+Generate Key Pair" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1"><mxGeometry x="240" y="380" width="170" height="60" as="geometry"/></mxCell>
+        <mxCell id="n11" value="3.0
+Encode Plaintext
+into Blocks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1"><mxGeometry x="240" y="470" width="170" height="70" as="geometry"/></mxCell>
+        <mxCell id="n12" value="4.0
+Encrypt Blocks
+(c1, c2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1"><mxGeometry x="480" y="470" width="170" height="70" as="geometry"/></mxCell>
+        <mxCell id="n13" value="5.0
+Decrypt Blocks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1"><mxGeometry x="480" y="580" width="170" height="60" as="geometry"/></mxCell>
+        <mxCell id="n14" value="6.0
+Decode Blocks
+into Plaintext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1"><mxGeometry x="240" y="580" width="170" height="70" as="geometry"/></mxCell>
+        <mxCell id="n15" value="7.0
+Format Output
+and Status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1"><mxGeometry x="720" y="380" width="170" height="70" as="geometry"/></mxCell>
+        <mxCell id="n16" value="D1 | Active key pair (in memory)" style="shape=partialRectangle;top=0;bottom=0;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=center;" vertex="1" parent="1"><mxGeometry x="480" y="290" width="260" height="40" as="geometry"/></mxCell>
+        <mxCell id="n17" value="D2 | Key files: public_key.json / private_key.json (optional)" style="shape=partialRectangle;top=0;bottom=0;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=center;" vertex="1" parent="1"><mxGeometry x="720" y="290" width="300" height="50" as="geometry"/></mxCell>
+        <mxCell id="n18" value="Operating system CSPRNG" style="whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1"><mxGeometry x="720" y="480" width="200" height="50" as="geometry"/></mxCell>
+        <mxCell id="n19" value="raw input" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n8" target="n9"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n20" value="key size" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n9" target="n10"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n21" value="valid plaintext" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n9" target="n11"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n22" value="parsed (c1, c2)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n9" target="n13"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n23" value="(p, g, y), x" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n10" target="n16"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n24" value="public key" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n16" target="n12"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n25" value="private key x" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n16" target="n13"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n26" value="message blocks m &lt; p" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n11" target="n12"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n27" value="ciphertext blocks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n12" target="n15"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n28" value="recovered integers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n13" target="n14"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n29" value="plaintext string" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n14" target="n15"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n30" value="prime search, x" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;dashed=1;" edge="1" parent="1" source="n10" target="n18"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n31" value="fresh ephemeral k" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;dashed=1;" edge="1" parent="1" source="n12" target="n18"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n32" value="export / import" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;dashed=1;" edge="1" parent="1" source="n16" target="n17"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n33" value="ciphertext, plaintext,
+key values, error messages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="n15" target="n8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="n34" value="The application holds no persistent structured data other than the
+optional key files, so no relational database appears in this DFD." style="shape=note;whiteSpace=wrap;html=1;size=14;fillColor=#ffffcc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1"><mxGeometry x="60" y="470" width="150" height="110" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

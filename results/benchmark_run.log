@@ -1,0 +1,18 @@
+1. Key generation
+  key generation   256 bits: median      39.16 ms  (min 14.7, max 191.3)
+  key generation   512 bits: median    1205.87 ms  (min 205.4, max 2663.6)
+  key generation  1024 bits: median   12566.29 ms  (min 1823.9, max 27639.9)
+2. Encryption and decryption against key size
+    256 bits: encrypt 0.228 ms, decrypt 0.152 ms per block
+    512 bits: encrypt 1.323 ms, decrypt 0.745 ms per block
+   1024 bits: encrypt 7.466 ms, decrypt 3.966 ms per block
+3. Message size scaling
+      16 bytes ->    1 blocks, encrypt 1.35 ms, decrypt 0.80 ms
+      64 bytes ->    2 blocks, encrypt 2.69 ms, decrypt 1.54 ms
+     256 bytes ->    5 blocks, encrypt 6.64 ms, decrypt 3.73 ms
+    1024 bytes ->   17 blocks, encrypt 22.50 ms, decrypt 12.61 ms
+    4096 bytes ->   67 blocks, encrypt 86.17 ms, decrypt 47.43 ms
+
+Graph written to /mnt/user-data/outputs/ElGamal-Encryption/results/benchmark_plot.png
+Environment recorded in /mnt/user-data/outputs/ElGamal-Encryption/results/benchmark_environment.txt
+CSV results written to /mnt/user-data/outputs/ElGamal-Encryption/results
