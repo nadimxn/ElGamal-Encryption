@@ -1,0 +1,144 @@
+name: Build Windows EXE
+
+# Builds ElGamal-Encryption.exe on a real Windows runner.
+#
+#   * push / pull request / manual run -> builds and uploads the EXE as a
+#     workflow artifact (downloadable from the run page, kept 90 days)
+#   * push of a tag like v1.0.0        -> additionally creates a GitHub Release
+#     and attaches the EXE to it, which is the link to give to a marker
+#
+# The build stops if the test suite fails, so a broken application is never
+# published.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write        # required to create a release and upload the asset
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Confirm Tkinter is available
+        run: python -c "import tkinter; print('Tkinter', tkinter.TkVersion)"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Record the build environment
+        run: |
+          python --version
+          pip show pyinstaller | Select-String -Pattern "Version"
+        shell: pwsh
+
+      - name: Run the test suite
+        run: python -m pytest tests -v
+
+      - name: Build the executable
+        run: pyinstaller --clean --noconfirm ElGamal-Encryption.spec
+
+      - name: Verify the executable exists
+        shell: pwsh
+        run: |
+          $exe = "dist\ElGamal-Encryption.exe"
+          if (-not (Test-Path $exe)) {
+            Write-Error "Build did not produce $exe"
+            exit 1
+          }
+          $size = (Get-Item $exe).Length
+          Write-Host "Built $exe ($size bytes)"
+          if ($size -lt 1MB) {
+            Write-Error "Executable is implausibly small; the build is probably broken."
+            exit 1
+          }
+
+      - name: Run the executable self test
+        shell: pwsh
+        working-directory: dist
+        run: |
+          # The application is built windowed (console=False), so redirecting
+          # its standard streams can fail to initialise. It is therefore run
+          # without redirection and the result is read from the log file that
+          # --selftest writes beside the executable.
+          $proc = Start-Process -FilePath ".\ElGamal-Encryption.exe" `
+                                -ArgumentList "--selftest" -PassThru -Wait
+          if (-not (Test-Path "elgamal_selftest.log")) {
+            Write-Error "Self test produced no log file."
+            exit 1
+          }
+          Get-Content elgamal_selftest.log
+          if ($proc.ExitCode -ne 0) {
+            Write-Error "Executable self test exited with code $($proc.ExitCode)"
+            exit 1
+          }
+          if (-not (Select-String -Path elgamal_selftest.log -Pattern "SELFTEST PASS" -Quiet)) {
+            Write-Error "Self test did not report PASS"
+            exit 1
+          }
+          Write-Host "Executable self test passed."
+          Remove-Item elgamal_selftest.log
+
+      - name: Upload the executable as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ElGamal-Encryption-exe
+          path: dist/ElGamal-Encryption.exe
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Attach the executable to a GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/ElGamal-Encryption.exe
+          name: ElGamal Encryption ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          body: |
+            **ElGamal Encryption Implementation — Windows executable**
+
+            CCS2243 Cryptography Essential · S M Nadim Mahmud (AIU24102398)
+
+            ### Download and run
+
+            1. Download `ElGamal-Encryption.exe` below.
+            2. Double-click it. No Python installation is required.
+            3. Windows SmartScreen may warn that the publisher is unknown,
+               because the executable is not code-signed. Choose
+               **More info → Run anyway**.
+
+            ### Verify it works
+
+            From a command prompt:
+
+            ```
+            ElGamal-Encryption.exe --selftest
+            ```
+
+            This generates a key pair and performs encryption and decryption
+            round trips, then reports PASS or FAIL.
+
+            ### Note
+
+            This is an educational implementation of textbook ElGamal, built
+            for a university assessment. It provides confidentiality only: no
+            integrity, no authentication, and it is malleable. It is not
+            intended to protect real data.
